@@ -49,6 +49,10 @@ app.post('/home', (req, res, next) => {
             res.sendStatus(404).send("Token not found!");
         })
 });
+// test route
+app.get('/test', (req, res, next) => {
+   res.send('App is working!');
+});
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
