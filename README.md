@@ -25,3 +25,6 @@ password: Easycode1234
 
 ```
 ---
+
+## Если сервер упал
+Перейдите по адресу https://easycode-test-auth-server.herokuapp.com/test
