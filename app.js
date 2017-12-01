@@ -51,7 +51,7 @@ app.post('/home', (req, res, next) => {
 });
 // test route
 app.get('/test', (req, res, next) => {
-   res.send('App is working!');
+   res.send('App is working!!');
 });
 
 app.listen(port, () => {
