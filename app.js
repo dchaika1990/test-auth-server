@@ -24,7 +24,7 @@ const User = mongoose.model('users');
 
 // Login form post
 app.post('/login', (req, res, next) => {
-    res.send('Hello');
+    res.send('Hello', req.body);
     User.findOne({email: req.body.email})
         .then(user => {
             var id = uuid();
