@@ -29,7 +29,7 @@ app.post('/login', (req, res, next) => {
             if (req.body.email === user.email && req.body.password === user.password){
                 user.save()
                     .then( user => {
-                        res.sendStatus(200).send(id);
+                        res.set('Access-Control-Allow-Origin', '*').sendStatus(200).send(id);
                     });
             } else {
                 res.sendStatus(404).send('Incorrect email or password');
