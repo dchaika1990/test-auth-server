@@ -1,10 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 var uuid = require('uuid4');
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(cors());
 
 // Connect to mongoose
 mongoose.connect('mongodb://easycode:easycode@ds125146.mlab.com:25146/easycode-testing-db', {
@@ -29,7 +32,7 @@ app.post('/login', (req, res, next) => {
             if (req.body.email === user.email && req.body.password === user.password){
                 user.save()
                     .then( user => {
-                        res.set('Access-Control-Allow-Origin', '*').sendStatus(200).send(id);
+                        res.sendStatus(200).send(id);
                     });
             } else {
                 res.sendStatus(404).send('Incorrect email or password');
