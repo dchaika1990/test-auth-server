@@ -37,11 +37,11 @@ app.post('/login', (req, res, next) => {
                         res.status(200).send(id);
                     });
             } else {
-                res.sendStatus(404).send('Incorrect email or password');
+                res.status(404).send('Incorrect email or password');
             }
         })
         .catch( error => {
-            res.sendStatus(404).send('User not found');
+            res.status(404).send('User not found');
         })
 });
 // Home page
