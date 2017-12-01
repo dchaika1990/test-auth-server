@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+var uuid = require('uuid4');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,13 +15,39 @@ mongoose.connect('mongodb://easycode:easycode@ds125146.mlab.com:25146/easycode-t
 
 
 // Load User model
-require('../models/Users');
+require('./models/Users');
 const User = mongoose.model('users');
 
 
 // Login form post
-router.post('/login', (req, res, next) => {
-    
+app.post('/login', (req, res, next) => {
+    User.findOne({email: req.body.email})
+        .then(user => {
+            var id = uuid();
+            user.token = id;
+
+            if (req.body.email === user.email && req.body.password === user.password){
+                user.save()
+                    .then( user => {
+                        res.sendStatus(200).send(id);
+                    });
+            } else {
+                res.sendStatus(404).send('Incorrect email or password');
+            }
+        })
+        .catch( error => {
+            res.sendStatus(404).send('User not found');
+        })
+});
+// Home page
+app.post('/home', (req, res, next) => {
+    User.findOne({token: req.body.token})
+        .then( user => {
+            res.send(user.name);
+        })
+        .catch(error => {
+            res.sendStatus(404).send("Token not found!");
+        })
 });
 
 app.listen(port, () => {
