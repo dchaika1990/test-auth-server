@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-var uuid = require('uuid4');
+const uuid = require('uuid4');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -32,10 +33,12 @@ app.post('/login', (req, res, next) => {
             user.token = id;
 
             if (req.body.email === user.email && req.body.password === user.password){
+
                 user.save()
                     .then( user => {
                         res.status(200).send(id);
                     });
+                
             } else {
                 res.status(404).send('Incorrect email or password');
             }
@@ -44,6 +47,45 @@ app.post('/login', (req, res, next) => {
             res.status(404).send('User not found');
         })
 });
+
+app.post('/signup', (req, res, next) => {
+
+    User.findOne({email: req.body.email})
+        .then( user => {
+            if ( user ) {
+                res.status(404).send('User already exists!');
+            } else {
+
+                let newUser = new User({
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password
+                });
+
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                  
+                      newUser.password = hash;
+              
+                      newUser.save()
+                        .then(user => {
+                            res.status(200).send('Success');
+                        })
+                        .catch(error => {
+                          console.log(error);
+                        });
+                    });    
+                  });
+    
+                
+            }
+            
+        })
+
+    
+
+})
+
 // Home page
 app.post('/home', (req, res, next) => {
     User.findOne({token: req.body.token})
