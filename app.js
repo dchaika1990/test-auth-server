@@ -53,7 +53,7 @@ app.post('/login', (req, res, next) => {
 
         })
         .catch( error => {
-            res.status(404).send('Promise error');
+            res.status(404).send(error);
         })
 });
 
