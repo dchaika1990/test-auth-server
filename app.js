@@ -29,19 +29,28 @@ app.post('/login', (req, res, next) => {
 
     User.findOne({email: req.body.email})
         .then(user => {
-            var id = uuid();
-            user.token = id;
 
-            if (req.body.email === user.email && req.body.password === user.password){
+            if (!user) {
+                res.status(404).send('User not found');
+            } 
 
-                user.save()
-                    .then( user => {
-                        res.status(200).send(id);
-                    });
-                
-            } else {
-                res.status(404).send('Incorrect email or password');
-            }
+             // Match password
+            bcrypt.compare(password, user.password, (err, isMatch) => {
+                if(isMatch){
+
+                    var id = uuid();
+                    user.token = id;
+
+                    user.save()
+                        .then( user => {
+                            res.status(200).send(id);
+                        });
+
+                } else{
+                    res.status(404).send('Inccorect password!');
+                }
+            });
+
         })
         .catch( error => {
             res.status(404).send('User not found');
@@ -75,14 +84,9 @@ app.post('/signup', (req, res, next) => {
                           console.log(error);
                         });
                     });    
-                  });
-    
-                
+                });
             }
-            
         })
-
-    
 
 })
 
