@@ -68,7 +68,8 @@ app.post('/signup', (req, res, next) => {
                 let newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
-                    password: req.body.password
+                    password: req.body.password,
+                    token: uuid()
                 });
 
                 bcrypt.genSalt(10, (err, salt) => {
@@ -78,7 +79,7 @@ app.post('/signup', (req, res, next) => {
               
                       newUser.save()
                         .then(user => {
-                            res.status(200).send('Success');
+                            res.status(200).send(user.token);
                         })
                         .catch(error => {
                           console.log(error);
@@ -91,13 +92,14 @@ app.post('/signup', (req, res, next) => {
 })
 
 // Home page
-app.post('/home', (req, res, next) => {
+app.post('/verify', (req, res, next) => {
     User.findOne({token: req.body.token})
         .then( user => {
-            res.send(user.name);
-        })
-        .catch(error => {
-            res.sendStatus(404).send("Token not found!");
+            if( !user ) {
+                res.status(404).send("Token not found!");
+            }
+
+            res.status(200).send(user.name);
         })
 });
 // test route
