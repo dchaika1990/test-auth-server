@@ -35,7 +35,7 @@ app.post('/login', (req, res, next) => {
             } 
 
              // Match password
-            bcrypt.compare(password, user.password, (err, isMatch) => {
+            bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
                 if(isMatch){
 
                     var id = uuid();
