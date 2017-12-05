@@ -6,7 +6,7 @@ const uuid = require('uuid4');
 const bcrypt = require('bcryptjs');
 
 // Socket
-const client = require('socket.io').listen(4000).sockets;
+const client = require('socket.io').listen(process.env.PORT).sockets;
 
 
 const app = express();
