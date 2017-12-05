@@ -114,7 +114,8 @@ app.get('/test', (req, res, next) => {
 
 // Connect to socket
 client.on('connection', (socket) => {
-
+    console.log('Client connected');
+    
     socket.emit('connect');
     
 })
