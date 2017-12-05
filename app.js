@@ -15,8 +15,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Socket
-const client = require('socket.io');
-const io = client(app);
+// const client = require('socket.io');
+// const io = client(app);
 
 // Connect to mongoose
 mongoose.connect('mongodb://easycode:easycode@ds125146.mlab.com:25146/easycode-testing-db', {
@@ -116,12 +116,12 @@ app.get('/test', (req, res, next) => {
 
 
 // Connect to socket
-io.on('connection', (socket) => {
-    console.log('Client connected');
+// io.on('connection', (socket) => {
+//     console.log('Client connected');
     
-    socket.emit('connect');
+//     socket.emit('connect');
     
-})
+// })
 
 
 app.listen(port, () => {
