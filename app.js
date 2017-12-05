@@ -115,6 +115,7 @@ app.post('/verify', (req, res, next) => {
 
 app.get('/tasks', (req, res, next) => {
     Task.find({})
+        .sort({date: 'desc'})
         .then( tasks => {
             if( !tasks.length ) {
                 res.status(404).send("Task not found!");
