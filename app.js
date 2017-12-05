@@ -124,6 +124,16 @@ app.get('/tasks', (req, res, next) => {
             res.status(200).send(tasks);
         })
 })
+app.get('/remove:id', (req, res, next) => {
+    Task.remove({_id: req.body.id})
+        .then( tasks => {
+            if( !tasks.length ) {
+                res.status(404).send("Task not found!");
+            }
+
+            res.status(200).send("Remove success!");
+        })
+})
 
 // test route
 app.get('/test', (req, res, next) => {
