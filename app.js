@@ -30,6 +30,9 @@ mongoose.connect('mongodb://easycode:easycode@ds125146.mlab.com:25146/easycode-t
 require('./models/Users');
 const User = mongoose.model('users');
 
+// Load Task model
+require('./models/Tasks');
+const Task = mongoose.model('tasks');
 
 // Login form post
 app.post('/login', (req, res, next) => {
@@ -109,6 +112,18 @@ app.post('/verify', (req, res, next) => {
             res.status(200).send(user.name);
         })
 });
+
+app.get('/tasks', (req, res, next) => {
+    Task.find({})
+        .then( tasks => {
+            if( !tasks ) {
+                res.status(404).send("Task not found!");
+            }
+
+            res.status(200).send(tasks);
+        })
+})
+
 // test route
 app.get('/test', (req, res, next) => {
    res.send('App is working!!');
