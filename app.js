@@ -124,7 +124,7 @@ app.get('/tasks', (req, res, next) => {
             res.status(200).send(tasks);
         })
 })
-app.get('/remove:id', (req, res, next) => {
+app.post('/remove:id', (req, res, next) => {
     Task.remove({_id: req.body.id})
         .then( tasks => {
             if( !tasks.length ) {
