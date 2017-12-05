@@ -5,6 +5,10 @@ const cors = require('cors');
 const uuid = require('uuid4');
 const bcrypt = require('bcryptjs');
 
+// Socket
+const client = require('socket.io').listen(4000).sockets;
+
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -106,6 +110,15 @@ app.post('/verify', (req, res, next) => {
 app.get('/test', (req, res, next) => {
    res.send('App is working!!');
 });
+
+
+// Connect to socket
+client.on('connection', (socket) => {
+
+    socket.emit('connect');
+    
+})
+
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
