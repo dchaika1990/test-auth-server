@@ -125,7 +125,7 @@ app.get('/tasks', (req, res, next) => {
         })
 })
 app.post('/remove:id', (req, res, next) => {
-    Task.remove({_id: req.body.id})
+    Task.remove({_id: req.params.id})
         .then( tasks => {
             // if( !tasks.length ) {
             //     res.status(404).send("Task not found!");
