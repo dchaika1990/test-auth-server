@@ -116,7 +116,7 @@ app.post('/verify', (req, res, next) => {
 app.get('/tasks', (req, res, next) => {
     Task.find({})
         .then( tasks => {
-            if( !tasks || !tasks.length ) {
+            if( !tasks.length ) {
                 res.status(404).send("Task not found!");
             }
 
