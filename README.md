@@ -1,5 +1,9 @@
 ## Запросы к серверу
 
+---
+
+### Login/Signup/Verify
+
 1. **Login**. Метод запроса: **POST**, url: **https://easycode-test-auth-server.herokuapp.com/login** . Передовать данные в формате JSON в следующем виде: 
 ```js
 {
@@ -29,9 +33,27 @@
 
 ---
 
+### Получение/удаление тасков
+
+1. **Получение тасков**. Метод запроса: **GET**, url: **https://easycode-test-auth-server.herokuapp.com/tasks** .
+*Сервер вернет все таски из базы в формате JSON, пример одного таска: 
+```js
+{
+    date: "2017-12-05T12:39:24.900Z",
+    description: "Some description",
+    title: "My second task",
+    _id: "5a26ee8af36d28056f37e4cf"
+}
+```
+
+2. **Удаление тасков**. Метод запроса: **POST**, url: **https://easycode-test-auth-server.herokuapp.com/remove${id}** .В адрес запроса нужно подставлять id таска. 
+*Сервер вернет все таски из базы в формате JSON, пример одного таска.
+
+---
+
 ## Тестовые данные для входа
 ```js
-email: test@test@com
+email: test@easycode.com
 password: Easycode1234
 
 ```
