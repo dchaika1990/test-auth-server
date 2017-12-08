@@ -14,9 +14,9 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Socket
-// const client = require('socket.io');
-// const io = client(app);
+
+// Map global prmise - get rid of warning
+mongoose.Promise = global.Promise;
 
 // Connect to mongoose
 mongoose.connect('mongodb://easycode:easycode@ds125146.mlab.com:25146/easycode-testing-db', {
@@ -136,14 +136,6 @@ app.get('/test', (req, res, next) => {
    res.send('App is working!!!');
 });
 
-
-// Connect to socket
-// io.on('connection', (socket) => {
-//     console.log('Client connected');
-    
-//     socket.emit('connect');
-    
-// })
 
 
 app.listen(port, () => {
