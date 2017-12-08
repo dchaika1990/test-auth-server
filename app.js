@@ -41,7 +41,7 @@ app.post('/login', (req, res, next) => {
         .then(user => {
 
             if (!user) {
-                res.status(404).send('User not found!');
+                res.status(404).send('User not found');
             } 
 
              // Match password
