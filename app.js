@@ -62,11 +62,9 @@ app.post('/login', (req, res, next) => {
             });
 
         })
-        // .catch( error => {
-        //     res.status(404).send(error);
-        // })
 });
 
+// Registration 
 app.post('/signup', (req, res, next) => {
 
     User.findOne({email: req.body.email})
@@ -98,7 +96,7 @@ app.post('/signup', (req, res, next) => {
                 });
             }
         })
-})
+});
 
 // Home page
 app.post('/verify', (req, res, next) => {
@@ -112,6 +110,7 @@ app.post('/verify', (req, res, next) => {
         })
 });
 
+// Get all tasks
 app.get('/tasks', (req, res, next) => {
     Task.find({})
         .sort({date: 'desc'})
@@ -122,13 +121,34 @@ app.get('/tasks', (req, res, next) => {
 
             res.status(200).send(tasks);
         })
-})
+});
+
+// Remove task by id
 app.post('/remove:id', (req, res, next) => {
     Task.remove({_id: req.params.id})
         .then( tasks => {
             res.status(200).send(tasks);
         })
-})
+});
+
+// Create new task
+app.post('/create-task', (req, res, next) => {
+
+    let newTask = new Task({
+        title: req.body.title,
+        description: req.body.description,
+    });
+
+    newTask.save()
+        .then(task => {
+            res.status(200).send(task);
+        })
+        .catch(error => {
+            res.status(200).send(error);
+        });
+
+});
+
 
 // test route
 app.get('/test', (req, res, next) => {
