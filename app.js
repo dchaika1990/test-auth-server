@@ -62,9 +62,9 @@ app.post('/login', (req, res, next) => {
             });
 
         })
-        .catch( error => {
-            res.status(404).send(error);
-        })
+        // .catch( error => {
+        //     res.status(404).send(error);
+        // })
 });
 
 app.post('/signup', (req, res, next) => {
@@ -98,7 +98,6 @@ app.post('/signup', (req, res, next) => {
                 });
             }
         })
-
 })
 
 // Home page
