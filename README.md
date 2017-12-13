@@ -58,7 +58,9 @@
 }
 ```
 
-4. **Редактирование таска**. Метод запроса: **POST**, url: **https://easycode-test-auth-server.herokuapp.com/edit-task** .
+4. **Редактирование таска**.
+Метод запроса: **POST**,
+url: **https://easycode-test-auth-server.herokuapp.com/edit-task** .
 Передовать данные в формате JSON в следующем виде:
 ```js
 {
