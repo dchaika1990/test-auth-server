@@ -49,6 +49,15 @@
 2. **Удаление тасков**. Метод запроса: **POST**, url: **https://easycode-test-auth-server.herokuapp.com/remove${id}** .В адрес запроса нужно подставлять id таска. 
 *Сервер вернет все таски из базы в формате JSON, пример одного таска.*
 
+3. **Создание таска**. Метод запроса: **POST**, url: **https://easycode-test-auth-server.herokuapp.com/create-task** .
+Передовать данные в формате JSON в следующем виде:
+```js
+{
+    title: 'some title',
+    description: 'some description'
+}
+```
+
 ---
 
 ## Тестовые данные для входа

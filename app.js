@@ -149,6 +149,33 @@ app.post('/create-task', (req, res, next) => {
 
 });
 
+// Edit  task
+app.post('/edit-task', (req, res, next) => {
+
+    Task.findOne({_id: req.body.id})
+        .then( task => {
+
+            if ( !task ) {
+                res.send(404).send('Task not found!');
+            }
+
+            task.title = req.body.title;
+            task.description = req.body.description;
+            task.date = Date.now();
+
+            task.save()
+                .then( task => {
+                    res.status(200).send('Edit success!');
+                })
+                .catch( error => {
+                    res.status(404).send(error);
+                })
+
+        })
+
+
+});
+
 
 // test route
 app.get('/test', (req, res, next) => {
