@@ -47,7 +47,7 @@
 ```
 
 2. **Удаление тасков**. Метод запроса: **POST**, url: **https://easycode-test-auth-server.herokuapp.com/remove${id}** .В адрес запроса нужно подставлять id таска. 
-*Сервер вернет все таски из базы в формате JSON, пример одного таска.*
+*Сервер вернет все таски из базы в формате JSON.*
 
 3. **Создание таска**. Метод запроса: **POST**, url: **https://easycode-test-auth-server.herokuapp.com/create-task** .
 Передовать данные в формате JSON в следующем виде:
@@ -64,6 +64,7 @@ url: **https://easycode-test-auth-server.herokuapp.com/edit-task** .
 Передовать данные в формате JSON в следующем виде:
 ```js
 {
+    id: "5a26ee8af36d28056f37e4cf", // id нужно получить с родительского блока из атрибута data-id
     title: 'some title',
     description: 'some description'
 }
