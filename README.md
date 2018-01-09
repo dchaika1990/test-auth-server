@@ -74,8 +74,8 @@ url: **https://easycode-test-auth-server.herokuapp.com/edit-task** .
 
 ## Тестовые данные для входа
 ```js
-email: test@easycode.com
-password: Easycode1234
+email: easycode@best.com
+password: Easycode2015
 
 ```
 *Сервер вернет token в виде строки, пример токена: `6a58824a-4bfa-44ab-b415-a145ce80913e`*
